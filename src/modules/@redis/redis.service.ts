@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { RedisClientIds } from './redis.const';
-import { isJsonString } from '../../@common/utils';
+import { isJsonString } from '@common/utilities/utils';
 import Redis from 'ioredis';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class RedisService {
     this.redis = _redis;
   }
 
-  set(key: string, value: string) {
+  set(key: string, value: string | number) {
     this.redis.set(key, value);
   }
 
@@ -27,6 +27,18 @@ export class RedisService {
         }
       });
     });
+  }
+
+  async setMultiple(
+    keyValuePairs: { key: string; value: string }[],
+  ): Promise<void> {
+    const pipeline = this.redis.pipeline();
+
+    keyValuePairs.forEach(({ key, value }) => {
+      pipeline.set(key, value);
+    });
+
+    await pipeline.exec();
   }
 
   /**
