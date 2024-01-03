@@ -1,12 +1,13 @@
 import { Controller, Post, Body, HttpStatus, UseGuards } from '@nestjs/common';
 import { ExchangesService } from './exchanges.service';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ExchangeDto, UpdateExchangeDto } from './dto/exchange.dto';
 import { RequestExchangeDto } from './dto/request-exchange.dto';
 import { AuthGuard } from '@nestjs/passport';
 
 @UseGuards(AuthGuard('jwt'))
 @ApiTags('Exchanges')
+@ApiBearerAuth()
 @Controller('exchanges')
 export class ExchangesController {
   constructor(private readonly exchangesService: ExchangesService) {}

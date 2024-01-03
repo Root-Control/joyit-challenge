@@ -1,73 +1,55 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# Nombre del Proyecto NestJS con WebSockets
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Este proyecto es una aplicación de chat construida con NestJS/Fastify/Redis. Permite hacer exchanges, está limitada por algunas monedas como USD, CAD, GBP, COP, ARS, todas estas monedas pueden interactuar con todas las monedas existentes y viceversa, monedas inexistentes en la lista no pueden comunicarse con otras inexistentes, pero éstas si pueden, ejm: USD_PEN, PEN_USD, CAD_PEN, PEN_CAD, GBP_USD, USD_GBP, etc.
 
-## Description
+## Comenzando
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Para comenzar a utilizar este proyecto, sigue los pasos a continuación para configurar el entorno en tu máquina local.
 
-## Installation
+### Prerrequisitos
+
+Necesitarás Docker instalado en tu sistema para ejecutar este proyecto. 
+
+### Instalación con Docker
+
+Para iniciar el proyecto, solo necesitas ejecutar el siguiente comando:
 
 ```bash
-$ npm install
+docker compose up -d
 ```
 
-## Running the app
+Las variables de entorno se copiarán automáticamente de `.env.docker` a `.env` en el contenedor de Docker.
 
-```bash
-# development
-$ npm run start
+## Uso
 
-# watch mode
-$ npm run start:dev
+Una vez que el proyecto esté en ejecución, puedes probar las apis, empezando por la generadora de token, ya que los otros endpoints están protegidos por JWT:
 
-# production mode
-$ npm run start:prod
-```
+- `[GET] http://localhost:3000/api/get-token` => `[GET] http://18.220.251.169:3000/api/get-token`
+- `[POST] http://localhost:3000/api/exchanges` => `[POST] http://18.220.251.169:3000/api/exchanges`
+- `[POST] http://localhost:3000/api/exchanges/update-exchange-rate` => `[POST] http://18.220.251.169//api/exchanges/update-exchange-rate`
 
-## Test
+# Documentación de Api
+- `[Browser] http://localhost:3000/api` => `[Browser] http://18.220.251.169:3000/api`
 
-```bash
-# unit tests
-$ npm run test
+- La documentación muestran los DTOs, y respuestas de DTO
+### Ejecución de Pruebas
 
-# e2e tests
-$ npm run test:e2e
+- **WebSocket Configuration**: Puedes encontrar la configuración completa del WebSocket en `src/events/events.gateway.ts`, donde cada parte del código está explicada detalladamente.
 
-# test coverage
-$ npm run test:cov
-```
+- **Message Service**: El servicio que ejecuta el emisor para crear mensajes se encuentra en `modules/messages`.
 
-## Support
+- **Listado de Mensajes**: Todos los mensajes se listan en `http://localhost:3000/api/messages`.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- **Persistencia de Mensajes en HTML**: Los mensajes existentes se están bindeando en los archivos HTML para su persistencia.
 
-## Stay in touch
+### Notas Adicionales
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- El código cumple con los requisitos especificados, aunque no se hace un uso extenso de OOP, CQRS, observables u otros conceptos avanzados debido a la naturaleza y alcance del proyecto.
 
-## License
 
-Nest is [MIT licensed](LICENSE).
+## Contacto
+
+Email - [l2oot.control@gmail.com](mailto:l2oot.control@gmail.com)
+
+Link del proyecto: [https://github.com/Root-Control](https://github.com/Root-Control)
