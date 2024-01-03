@@ -36,7 +36,7 @@ Una vez que el proyecto esté en ejecución, puedes probar las apis, empezando p
 
 ### Ejecución de Pruebas
 
-- **Specs simples validando con data mokceada**: npm run test
+- **Specs simples validando con data mockeada**: npm run test
 
 ### Despliegue
 - **AWS EC2**: Servidor Básico con Redis, plan de usar Nginx y evitar la exposición del puerto 3000, el puerto está expuesto intencionalmente para pruebas.
