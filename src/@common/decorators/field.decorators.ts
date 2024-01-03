@@ -142,7 +142,6 @@ export function CurrencyField(
 export function StringField(
   options: Omit<ApiPropertyOptions, 'type'> & IStringFieldOptions = {},
 ): PropertyDecorator {
-  console.log('Decorate')
   const decorators = [Type(() => String), IsString({ each: options.each })];
 
   if (options.nullable) {

@@ -19,7 +19,6 @@ import { AuthenticationModule } from './modules/authentication';
       providerId: RedisClientIds.main,
       useFactory: async (configService: ConfigService) => {
         const { host, port } = configService.get<IRedis>('redis');
-        console.log(')====================');
         return { host, port };
       },
       inject: [ConfigService],
