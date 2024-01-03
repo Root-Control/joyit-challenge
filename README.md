@@ -1,5 +1,5 @@
 
-# Nombre del Proyecto NestJS con WebSockets
+# NestJS/Redis/Currency API
 
 Este proyecto es una aplicación de chat construida con NestJS/Fastify/Redis. Permite hacer exchanges, está limitada por algunas monedas como USD, CAD, GBP, COP, ARS, todas estas monedas pueden interactuar con todas las monedas existentes y viceversa, monedas inexistentes en la lista no pueden comunicarse con otras inexistentes, pero éstas si pueden, ejm: USD_PEN, PEN_USD, CAD_PEN, PEN_CAD, GBP_USD, USD_GBP, etc.
 
@@ -13,7 +13,7 @@ Necesitarás Docker instalado en tu sistema para ejecutar este proyecto.
 
 ### Instalación con Docker
 
-Para iniciar el proyecto, solo necesitas ejecutar el siguiente comando:
+Para iniciar el proyecto, solo necesitas ejecutar el siguiente comando, instalará Redis in memory DB, y sus demás dependenias
 
 ```bash
 docker compose up -d
@@ -33,17 +33,12 @@ Una vez que el proyecto esté en ejecución, puedes probar las apis, empezando p
 - `[Browser] http://localhost:3000/api` => `[Browser] http://18.220.251.169:3000/api`
 
 - La documentación muestran los DTOs, y respuestas de DTO
+
 ### Ejecución de Pruebas
 
-- **WebSocket Configuration**: Puedes encontrar la configuración completa del WebSocket en `src/events/events.gateway.ts`, donde cada parte del código está explicada detalladamente.
+- **Specs simples validando con data mokceada**: npm run test
 
-- **Message Service**: El servicio que ejecuta el emisor para crear mensajes se encuentra en `modules/messages`.
 
-- **Listado de Mensajes**: Todos los mensajes se listan en `http://localhost:3000/api/messages`.
-
-- **Persistencia de Mensajes en HTML**: Los mensajes existentes se están bindeando en los archivos HTML para su persistencia.
-
-### Notas Adicionales
 
 - El código cumple con los requisitos especificados, aunque no se hace un uso extenso de OOP, CQRS, observables u otros conceptos avanzados debido a la naturaleza y alcance del proyecto.
 
