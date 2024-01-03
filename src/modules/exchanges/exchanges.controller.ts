@@ -28,7 +28,9 @@ export class ExchangesController {
     description: 'Bad Request.',
   })
   @Post()
-  create(@Body() requestExchangeDto: RequestExchangeDto): Promise<ExchangeDto> {
+  applyExchange(
+    @Body() requestExchangeDto: RequestExchangeDto,
+  ): Promise<ExchangeDto> {
     return this.exchangesService.applyExchangeRate(requestExchangeDto);
   }
 
