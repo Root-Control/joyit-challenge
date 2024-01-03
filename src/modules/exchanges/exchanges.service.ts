@@ -16,30 +16,47 @@ export class ExchangesService {
   async applyExchangeRate(requestExchangeDto: RequestExchangeDto) {
     const { currencyOrigin, destinationCurrency, amount } = requestExchangeDto;
 
-    // Construye las claves para buscar las tasas de cambio en Redis.
+    /**
+     * Building key  Pairs
+     */
     const currencyPairKey = `${destinationCurrency}_${currencyOrigin}`;
     const inverseCurrencyPairKey = `${currencyOrigin}_${destinationCurrency}`;
 
     try {
-      // Intenta obtener la tasa de cambio directa e inversa.
+      /**
+       * Applying exchange , if not, take the inverted one
+       */
       const exchangeRate = await this.redisService.get<number>(currencyPairKey);
       const invertedExchangeRate = await this.redisService.get<number>(
         inverseCurrencyPairKey,
       );
 
+      /**
+       * Intentional throw if exchange Pairs doesn't exist
+       */
       if (!exchangeRate && !invertedExchangeRate) {
         throw new Error('Currency pairs not supported');
       }
+
+      /**
+       * Regular and inverted calculation depending of the ase
+       */
       const amountAfterExchange = exchangeRate
         ? amount / exchangeRate
         : invertedExchangeRate * amount;
 
+      /**
+       * Dto build
+       */
       const exchangeDto = {
         ...requestExchangeDto,
         exchangeRate: exchangeRate || invertedExchangeRate,
         amountAfterExchange,
       };
 
+      /**
+       * Dto transformation, to validate exposures
+       */
       return plainToClass(ExchangeDto, exchangeDto);
     } catch (ex) {
       throw new HttpException(ex.message, HttpStatus.UNPROCESSABLE_ENTITY);
